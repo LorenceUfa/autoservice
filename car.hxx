@@ -6,6 +6,8 @@
 class Car
 {
 public:
+  Car();
+
   Car(uint id,
       uint owner_id,
       std::string brand,
@@ -21,8 +23,9 @@ public:
   std::string get_brand() const;
   std::string get_model() const;
 
+  friend std::istream& operator>>(std::istream &is, Car& car);
+
 private:
-  Car() = delete;
   uint _id;
   uint _owner_id;
   std::string _brand;

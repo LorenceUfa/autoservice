@@ -1,5 +1,10 @@
 #include <car.hxx>
 
+Car::Car() :
+  _id(0), _owner_id(0), _brand(""), _model("")
+{
+
+}
 Car::Car(uint id,
          uint owner_id,
          std::string brand,
@@ -8,6 +13,18 @@ Car::Car(uint id,
 {
 
 }
+
+std::istream& operator>>(std::istream &is, Car& car)
+{
+  std::cout << "Brand: ";
+  is >> car._brand;
+
+  std::cout << "Model: ";
+  is >> car._model;
+
+  return is;
+}
+
 
 void Car::set_id(uint id)
 {

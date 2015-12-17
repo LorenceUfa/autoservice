@@ -14,6 +14,19 @@ void DataBase::add_data()
   std::cin >> owner;
 
   add_data(owner);
+
+  std::cout << "Enter car information...\n";
+  Car car;
+  std::cin >> car;
+
+  add_data(car);
+
+  std::cout << "Enter service information...\n";
+  Service service;
+  std::cin >> service;
+
+  add_data(service);
+
 }
 
 void DataBase::add_data(Car& car)

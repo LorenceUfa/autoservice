@@ -1,5 +1,10 @@
 #include <service.hxx>
 
+Service::Service()
+{
+
+}
+
 Service::Service(uint id,
                  uint owner_id,
                  uint car_id,
@@ -12,6 +17,25 @@ Service::Service(uint id,
   _date_in(date_in), _date_out(date_out)
 {
 
+}
+
+std::istream& operator>>(std::istream &is, Service& service)
+{
+  std::string str;
+
+  std::cout << "Date (DD/MM/YYYY): ";
+  is >> str;
+  service._date_in =
+      QDate::fromString(QString::fromStdString(str),
+                        "dd/MM/yyyy");
+
+  std::cout << "Description: ";
+  is >> service._description;
+
+  std::cout << "Coast: ";
+  is >> service._coast;
+
+  return is;
 }
 
 void Service::set_id(uint id)

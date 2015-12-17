@@ -7,6 +7,8 @@
 class Service
 {
 public:
+  Service();
+
   Service(uint id,
           uint owner_id,
           uint car_id,
@@ -38,8 +40,9 @@ public:
   QDate get_date_in() const;
   QDate get_date_out() const;
 
+  friend std::istream& operator>>(std::istream &is, Service& service);
+
 private:
-  Service() = delete;
   uint _id;
   uint _owner_id;
   uint _car_id;
