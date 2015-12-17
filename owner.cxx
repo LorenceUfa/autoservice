@@ -28,6 +28,17 @@ std::istream& operator>>(std::istream &is, Owner& owner)
   return is;
 }
 
+std::ostream& operator<<(std::ostream &os, const Owner& owner)
+{
+  os << owner._surname << " "
+     << owner._name << " "
+     << owner._sec_name
+     << std::endl;
+
+  return os;
+}
+
+
 void Owner::set_id(uint id)
 {
   _id = id;

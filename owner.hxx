@@ -24,6 +24,7 @@ public:
   std::string get_sec_name() const;
 
   friend std::istream& operator>>(std::istream &is, Owner& owner);
+  friend std::ostream& operator<<(std::ostream &os, const Owner& owner);
 
 private:
   uint          _id;

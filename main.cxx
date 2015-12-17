@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
   DataBase db;
 
   db.add_data();
+  db.show_data();
 
   exit(0);
   return a.exec();

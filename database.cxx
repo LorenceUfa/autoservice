@@ -29,6 +29,27 @@ void DataBase::add_data()
 
 }
 
+void DataBase::show_data()
+{
+  std::cout << "Clients data:\n";
+
+  for (const auto& owner : _owner)
+  {
+    std::cout << owner;
+  }
+
+  for (const auto& car : _car)
+  {
+    std::cout << car;
+  }
+
+  for (const auto& service : _service)
+  {
+    std::cout << service;
+  }
+
+}
+
 void DataBase::add_data(Car& car)
 {
   car.set_id(++_car_id);

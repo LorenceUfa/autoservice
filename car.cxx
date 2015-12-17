@@ -25,6 +25,15 @@ std::istream& operator>>(std::istream &is, Car& car)
   return is;
 }
 
+std::ostream& operator<<(std::ostream &os, const Car& car)
+{
+  os << car._brand << " "
+     << car._model
+     << std::endl;
+
+  return os;
+}
+
 
 void Car::set_id(uint id)
 {

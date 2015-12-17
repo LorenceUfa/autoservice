@@ -38,6 +38,17 @@ std::istream& operator>>(std::istream &is, Service& service)
   return is;
 }
 
+std::ostream& operator<<(std::ostream &os, const Service& service)
+{
+  os << service._date_in.toString("dd/MM/yyyy").toStdString() << " "
+     << service._date_out.toString("dd/MM/yyyy").toStdString() << " "
+     << service._description << " "
+     << service._coast
+     << std::endl;
+
+  return os;
+}
+
 void Service::set_id(uint id)
 {
   _id = id;
