@@ -29,6 +29,13 @@ void DataBase::add_data()
 
 }
 
+void DataBase::add_owner()
+{
+  std::cout << "Enter client information...\n";
+  Owner owner;
+  std::cin >> owner;
+}
+
 void DataBase::show_data()
 {
   std::cout << "Clients data:\n";
@@ -50,18 +57,22 @@ void DataBase::show_data()
 
 }
 
-void DataBase::add_data(Car& car)
+uint DataBase::add_data(Car& car)
 {
   car.set_id(++_car_id);
 
   _car.push_back(car);
+
+  return car.get_id();
 }
 
-void DataBase::add_data(Owner& owner)
+uint DataBase::add_data(Owner& owner)
 {
   owner.set_id(++_owner_id);
 
   _owner.push_back(owner);
+
+  return owner.get_id();
 }
 
 void DataBase::add_data(Service& service)

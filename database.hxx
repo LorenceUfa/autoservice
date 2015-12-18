@@ -16,6 +16,10 @@ public:
   void remove_data();
   void show_data();
 
+  void add_owner();
+  void add_car(uint owner_id);
+  void add_service(uint owner_id, uint car_id);
+
 private:
   std::list<Car> _car;
   std::list<Owner> _owner;
@@ -25,13 +29,14 @@ private:
   uint _owner_id;
   uint _service_id;
 
-  void add_data(Car& car);
-  void add_data(Owner& owner);
+  uint add_data(Car& car);
+  uint add_data(Owner& owner);
   void add_data(Service& service);
 
   void remove_data(const Car&);
   void remove_data(const Owner&);
   void remove_data(const Service&);
+
 };
 
 #endif // DATABASE_HXX
