@@ -37,6 +37,9 @@ private:
   void remove_data(const Owner&);
   void remove_data(const Service&);
 
+  uint find_owner() const;
+  uint find_car(const uint owner_id) const;
+
 };
 
 #endif // DATABASE_HXX

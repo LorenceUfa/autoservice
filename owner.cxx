@@ -30,7 +30,8 @@ std::istream& operator>>(std::istream &is, Owner& owner)
 
 std::ostream& operator<<(std::ostream &os, const Owner& owner)
 {
-  os << owner._surname << " "
+  os << owner._id << " "
+     << owner._surname << " "
      << owner._name << " "
      << owner._sec_name
      << std::endl;
