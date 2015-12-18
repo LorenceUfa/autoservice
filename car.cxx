@@ -29,8 +29,7 @@ std::ostream& operator<<(std::ostream &os, const Car& car)
 {
   os << car._id << " "
      << car._brand << " "
-     << car._model
-     << std::endl;
+     << car._model;
 
   return os;
 }

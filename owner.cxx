@@ -33,8 +33,7 @@ std::ostream& operator<<(std::ostream &os, const Owner& owner)
   os << owner._id << " "
      << owner._surname << " "
      << owner._name << " "
-     << owner._sec_name
-     << std::endl;
+     << owner._sec_name;
 
   return os;
 }

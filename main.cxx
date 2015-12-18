@@ -13,10 +13,13 @@ int main(int argc, char *argv[])
   while(!result)
   {
     success = false;
+    std::cout << std::endl << std::endl;
+
     std::cout << "Menu...\n";
     std::cout << "1) Add new owner\n"
               << "2) Add new car for choosen owner\n"
               << "3) Write down the famous owner on service\n"
+              << "4) Show data\n"
               << "0) Exit\n\n";
     while(!success)
     {
@@ -29,6 +32,7 @@ int main(int argc, char *argv[])
         case 1: db.add_owner();       success = true; break;
         case 2: db.add_car(0);        success = true; break;
         case 3: db.add_service(0, 0); success = true; break;
+        case 4: db.show_data();       success = true; break;
         default:
           {
             std::cout << "There is no such number!";

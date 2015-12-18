@@ -30,7 +30,9 @@ std::istream& operator>>(std::istream &is, Service& service)
                         "dd/MM/yyyy");
 
   std::cout << "Description: ";
-  is >> service._description;
+  std::getchar();
+  std::getline(is, service._description);
+//  is >> service._description;
 
   std::cout << "Coast: ";
   is >> service._coast;
@@ -42,8 +44,8 @@ std::ostream& operator<<(std::ostream &os, const Service& service)
 {
   os << service._date_in.toString("dd/MM/yyyy").toStdString() << " "
      << service._date_out.toString("dd/MM/yyyy").toStdString() << " "
-     << service._description << " "
-     << service._coast
+     << service._coast  << " "
+     << service._description
      << std::endl;
 
   return os;

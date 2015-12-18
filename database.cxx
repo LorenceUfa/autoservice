@@ -143,17 +143,29 @@ void DataBase::show_data()
 
   for (const auto& owner : _owner)
   {
-    std::cout << owner;
-  }
+    uint owner_id = 0;
 
-  for (const auto& car : _car)
-  {
-    std::cout << car;
-  }
+    owner_id = owner.get_id();
 
-  for (const auto& service : _service)
-  {
-    std::cout << service;
+    for (const auto& car: _car)
+    {
+      if (owner_id != car.get_owner_id())
+        continue;
+
+      uint car_id = 0;
+      car_id = car.get_id();
+
+      for (const auto& service : _service)
+      {
+        if ((car_id != service.get_car_id()) ||
+            (owner_id != service.get_owner_id()))
+          continue;
+
+        std::cout << owner << " ";
+        std::cout << car << " ";
+        std::cout << service;
+      }
+    }
   }
 
 }
