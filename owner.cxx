@@ -17,13 +17,13 @@ Owner::Owner(uint        id,
 
 std::istream& operator>>(std::istream &is, Owner& owner)
 {
-  std::cout << "Enter surname: ";
+  std::cout << "Surname: ";
   is >> owner._surname;
 
-  std::cout << "Enter name: ";
+  std::cout << "Name: ";
   is >> owner._name;
 
-  std::cout << "Enter second name: ";
+  std::cout << "Second name: ";
   is >> owner._sec_name;
   return is;
 }
