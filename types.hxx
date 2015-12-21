@@ -3,6 +3,14 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
+
+enum
+{
+  owner_head = 1,
+  car_head,
+  service_head
+};
 
 typedef unsigned int uint;
 

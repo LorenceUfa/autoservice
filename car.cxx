@@ -1,4 +1,4 @@
-#include <car.hxx>
+#include "car.hxx"
 
 Car::Car() :
   _id(0), _owner_id(0), _brand(""), _model("")
@@ -27,9 +27,9 @@ std::istream& operator>>(std::istream &is, Car& car)
 
 std::ostream& operator<<(std::ostream &os, const Car& car)
 {
-  os << car._id << " "
-     << car._brand << " "
-     << car._model;
+  os << std::setw(3) << car._id << "| "
+     << std::setw(10) << car._brand << "| "
+     << std::setw(10) << car._model << "| ";
 
   return os;
 }

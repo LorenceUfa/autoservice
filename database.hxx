@@ -1,11 +1,11 @@
 #ifndef DATABASE_HXX
 #define DATABASE_HXX
 
-#include <owner.hxx>
-#include <car.hxx>
-#include <service.hxx>
+#include "owner.hxx"
+#include "car.hxx"
+#include "service.hxx"
 #include <list>
-#include <types.hxx>
+#include "types.hxx"
 
 class DataBase
 {
@@ -41,5 +41,8 @@ private:
   uint find_car(const uint owner_id) const;
 
 };
+
+bool print_head(uint type);
+void print_border(uint count);
 
 #endif // DATABASE_HXX

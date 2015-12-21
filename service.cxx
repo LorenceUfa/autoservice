@@ -1,4 +1,4 @@
-#include <service.hxx>
+#include "service.hxx"
 
 Service::Service()
 {
@@ -42,11 +42,11 @@ std::istream& operator>>(std::istream &is, Service& service)
 
 std::ostream& operator<<(std::ostream &os, const Service& service)
 {
-  os << service._date_in.toString("dd/MM/yyyy").toStdString() << " "
-     << service._date_out.toString("dd/MM/yyyy").toStdString() << " "
-     << service._coast  << " "
+  os << std::setw(11) << service._date_in.toString("dd/MM/yyyy").toStdString() << "| "
+     << std::setw(11) << service._date_out.toString("dd/MM/yyyy").toStdString() << "| "
+     << std::setw(10) << service._coast  << "| "
      << service._description
-     << std::endl;
+     << "\n";
 
   return os;
 }

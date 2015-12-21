@@ -1,4 +1,4 @@
-#include <owner.hxx>
+#include "owner.hxx"
 
 Owner::Owner()
 {
@@ -30,10 +30,10 @@ std::istream& operator>>(std::istream &is, Owner& owner)
 
 std::ostream& operator<<(std::ostream &os, const Owner& owner)
 {
-  os << owner._id << " "
-     << owner._surname << " "
-     << owner._name << " "
-     << owner._sec_name;
+  os << std::setw(3) << owner._id << "| "
+     << std::setw(15) << owner._surname << "| "
+     << std::setw(10) << owner._name << "| "
+     << std::setw(15) << owner._sec_name << "| ";
 
   return os;
 }
