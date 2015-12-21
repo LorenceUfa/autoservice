@@ -29,8 +29,8 @@ private:
   uint _owner_id;
   uint _service_id;
 
-  uint add_data(Car& car);
-  uint add_data(Owner& owner);
+  uint add_data(Car& car) const;
+  uint add_data(Owner& owner) const;
   void add_data(Service& service);
 
   void remove_data(const Car&);

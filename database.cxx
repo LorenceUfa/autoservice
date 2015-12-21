@@ -253,7 +253,7 @@ void DataBase::show_data()
   std::cout << std::endl;
 }
 
-uint DataBase::add_data(Car& car)
+uint DataBase::add_data(Car& car) const
 {
   car.set_id(++_car_id);
 
@@ -262,7 +262,7 @@ uint DataBase::add_data(Car& car)
   return car.get_id();
 }
 
-uint DataBase::add_data(Owner& owner)
+uint DataBase::add_data(Owner& owner) const
 {
   owner.set_id(++_owner_id);
 
