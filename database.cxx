@@ -1,4 +1,5 @@
-#include "database.hxx"
+#include <database.hxx>
+#include <algorithm>
 
 DataBase::DataBase()
 {
@@ -82,6 +83,105 @@ void DataBase::add_service(uint owner_id, uint car_id)
   add_data(service);
 }
 
+void DataBase::remove_data()
+{
+  if (_owner.size() == 0)
+  {
+    std::cout << "Owner list is empty! Nothing to delete!\n";
+    return;
+  }
+
+  uint menu_id = 0;
+  bool success = false;
+
+  std::cout << "Choose removed object...\n";
+  std::cout << "1) Owner\n"
+               "2) Car\n"
+               "3) Service\n"
+               "0) Exit to main\n";
+  while(!success)
+  {
+    std::cout << "Enter number of choosen menu item: ";
+    std::cin >> menu_id;
+
+    switch(menu_id)
+    {
+      case 0: success = true;                       break;
+      case 1: success = true; remove_owner(0);      break;
+      case 2: success = true; remove_car(0);        break;
+      case 3: success = true; remove_service(0, 0); break;
+      default:
+        {
+          std::cout << "There is no such number!\n";
+          success = false; break;
+        }
+    }
+  }
+}
+
+void DataBase::remove_owner(uint id)
+{
+  if (_owner.size() == 0)
+  {
+    std::cout << "Owner list is empty!\n";
+    return;
+  }
+
+  if (id == 0)
+  {
+    id = find_owner();
+  }
+
+  std::list<Owner>::iterator own;
+
+  for (own = _owner.begin(); own != _owner.end(); )
+  {
+    if(own->get_id() == id)
+      _owner.erase(own++);
+    else
+      own++;
+  }
+
+  remove_car(id);
+}
+
+void DataBase::remove_car(uint owner_id)
+{
+  uint id = 0;
+  if (owner_id == 0)
+    id = find_car(owner_id);
+
+  std::list<Car>::iterator car;
+
+  if (owner_id == 0)
+  {
+    for (car = _car.begin(); car != _car.end(); )
+    {
+      if(car->get_id() == id)
+        _car.erase(car++);
+      else
+        car++;
+    }
+  }
+  else
+  {
+    for (car = _car.begin(); car != _car.end(); )
+    {
+      if(car->get_id() == id)
+        _car.erase(car++);
+      else
+        car++;
+    }
+  }
+
+
+}
+
+void DataBase::remove_service(uint owner_id, uint car_id)
+{
+
+}
+
 /* Functions for print and choose owner from list */
 uint DataBase::find_owner() const
 {
@@ -108,8 +208,8 @@ uint DataBase::find_owner() const
   for (const auto& owner : _owner)
   {
     std::cout << owner;
+    std::cout << "\n";
   }
-  std::cout << "\n";
 
   print_border(50);
 
@@ -253,7 +353,8 @@ void DataBase::show_data()
   std::cout << std::endl;
 }
 
-uint DataBase::add_data(Car& car) const
+
+uint DataBase::add_data(Car& car)
 {
   car.set_id(++_car_id);
 
@@ -262,7 +363,8 @@ uint DataBase::add_data(Car& car) const
   return car.get_id();
 }
 
-uint DataBase::add_data(Owner& owner) const
+
+uint DataBase::add_data(Owner& owner)
 {
   owner.set_id(++_owner_id);
 
@@ -309,6 +411,7 @@ bool print_head(uint type)
   }
   return false;
 }
+
 
 void print_border(uint count)
 {
