@@ -7,6 +7,7 @@ DataBase::DataBase()
   _service_id = 0;
 }
 
+/* Add owner to  database list */
 void DataBase::add_owner()
 {
   uint id = 0;
@@ -21,6 +22,7 @@ void DataBase::add_owner()
   add_car(id);
 }
 
+/* Add car by owner id */
 void DataBase::add_car(uint owner_id)
 {
   if (owner_id == 0) // Find owner for this car
@@ -46,6 +48,7 @@ void DataBase::add_car(uint owner_id)
   add_service(owner_id, car_id);
 }
 
+/* Add service by owner and car id */
 void DataBase::add_service(uint owner_id, uint car_id)
 {
   if (owner_id == 0)
@@ -79,6 +82,7 @@ void DataBase::add_service(uint owner_id, uint car_id)
   add_data(service);
 }
 
+/* Functions for print and choose owner from list */
 uint DataBase::find_owner() const
 {
   uint id = 0;
@@ -134,6 +138,8 @@ uint DataBase::find_owner() const
   return id;
 }
 
+
+/* Functions for print and choose car from list */
 uint DataBase::find_car(const uint owner_id) const
 {
   uint id = 0;
@@ -191,6 +197,7 @@ uint DataBase::find_car(const uint owner_id) const
   return id;
 }
 
+/* Function for show all database lists */
 void DataBase::show_data()
 {
   std::cout << "Clients data:\n";
