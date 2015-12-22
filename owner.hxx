@@ -23,8 +23,8 @@ public:
   std::string get_surname() const;
   std::string get_sec_name() const;
 
-  friend std::istream& operator>>(std::istream &is, Owner& owner);
-  friend std::ostream& operator<<(std::ostream &os, const Owner& owner);
+  friend std::istream& operator>>(std::istream &is, Owner& owner_e);
+  friend std::ostream& operator<<(std::ostream &os, const Owner& owner_e);
 
 private:
   uint          _id;

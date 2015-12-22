@@ -7,10 +7,10 @@
 
 enum
 {
-  owner_head = 1,
-  car_head,
-  service_head,
-  main_head
+  owner_e = 1,
+  car_e,
+  service_e,
+  main_e
 };
 
 typedef unsigned int uint;

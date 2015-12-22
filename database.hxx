@@ -15,6 +15,9 @@ public:
   void add_data();
   void remove_data();
   void show_data();
+  void edit_data();
+
+  void add_out_date();
 
   void add_owner();
   void add_car(uint owner_id);
@@ -30,9 +33,14 @@ private:
   uint _owner_id;
   uint _service_id;
 
-  uint add_data(Car& car);
-  uint add_data(Owner& owner);
-  void add_data(Service& service);
+  uint add_data(Car& car_e);
+  uint add_data(Owner& owner_e);
+  void add_data(Service& service_e);
+
+  void edit_owner();
+  void edit_car();
+  void edit_service();
+  void edit_all();
 
   void remove_owner(uint id);
   void remove_car(uint owner_id);
@@ -41,6 +49,8 @@ private:
   uint find_owner() const;
   uint find_car(const uint owner_id) const;
   uint find_service(const uint car_id) const;
+
+  bool list_is_empty(uint type) const;
 
 };
 

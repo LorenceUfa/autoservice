@@ -40,8 +40,8 @@ public:
   QDate get_date_in() const;
   QDate get_date_out() const;
 
-  friend std::istream& operator>>(std::istream &is, Service& service);
-  friend std::ostream& operator<<(std::ostream &os, const Service& service);
+  friend std::istream& operator>>(std::istream &is, Service& service_e);
+  friend std::ostream& operator<<(std::ostream &os, const Service& service_e);
 
 private:
   uint _id;

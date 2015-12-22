@@ -83,13 +83,162 @@ void DataBase::add_service(uint owner_id, uint car_id)
   add_data(service);
 }
 
+void DataBase::add_out_date()
+{
+  if (list_is_empty(owner_e))
+    return;
+
+  uint owner_id = 0, car_id = 0, service_id = 0;
+
+  owner_id = find_owner();
+  car_id = find_car(owner_id);
+  service_id = find_service(car_id);
+
+  for (auto& service : _service)
+  {
+    if (service.get_id() == service_id)
+    {
+      QDate date;
+      std::string str;
+
+      std::cout << "Enter car out date (DD/MM/YYY): ";
+      std::cin >> str;
+
+      date = QDate::fromString(QString::fromStdString(str), "dd/MM/yyyy");
+
+      service.set_date_out(date);
+    }
+  }
+}
+
+void DataBase::edit_data()
+{
+  if (list_is_empty(owner_e))
+    return;
+
+  uint menu_id = 0;
+  bool success = false;
+
+  std::cout << "Choose editing object...\n";
+  std::cout << "1) Owner\n"
+               "2) Car\n"
+               "3) Service\n"
+               "4) All information\n"
+               "0) Exit to main\n";
+  while(!success)
+  {
+    std::cout << "Enter number of choosen menu item: ";
+    std::cin >> menu_id;
+
+    switch(menu_id)
+    {
+      case 0: success = true;                 break;
+      case 1: success = true; edit_owner();   break;
+      case 2: success = true; edit_car();     break;
+      case 3: success = true; edit_service(); break;
+      case 4: success = true; edit_all();     break;
+      default:
+        {
+          std::cout << "There is no such number!\n";
+          success = false; break;
+        }
+    }
+  }
+}
+
+void DataBase::edit_owner()
+{
+  uint id = 0;
+
+  id = find_owner();
+
+  for (auto& owner : _owner)
+  {
+    if (owner.get_id() == id)
+    {
+      std::cin >> owner;
+      break;
+    }
+  }
+}
+
+void DataBase::edit_car()
+{
+  uint id = 0;
+  uint owner_id = 0;
+
+  owner_id = find_owner();
+  id = find_car(owner_id);
+
+  for (auto& car : _car)
+  {
+    if (car.get_id() == id)
+    {
+      std::cin >> car;
+      break;
+    }
+  }
+}
+
+void DataBase::edit_service()
+{
+  uint id = 0;
+  uint car_id = 0, owner_id = 0;
+
+  owner_id = find_owner();
+  car_id = find_car(owner_id);
+  id = find_service(car_id);
+
+  for (auto& service : _service)
+  {
+    if (service.get_id() == id)
+    {
+      std::cin >> service;
+      break;
+    }
+  }
+}
+
+void DataBase::edit_all()
+{
+  uint owner_id = 0, car_id = 0, service_id = 0;
+
+  owner_id = find_owner();
+  car_id = find_car(owner_id);
+  service_id = find_service(car_id);
+
+  for (auto& owner : _owner)
+  {
+    if (owner.get_id() == owner_id)
+    {
+      std::cin >> owner;
+      break;
+    }
+  }
+
+  for (auto& car : _car)
+  {
+    if (car.get_id() == car_id)
+    {
+      std::cin >> car;
+      break;
+    }
+  }
+
+  for (auto& service : _service)
+  {
+    if (service.get_id() == service_id)
+    {
+      std::cin >> service;
+      break;
+    }
+  }
+}
+
 void DataBase::remove_data()
 {
-  if (_owner.size() == 0)
-  {
-    std::cout << "Owner list is empty! Nothing to delete!\n";
+  if (list_is_empty(owner_e))
     return;
-  }
 
   uint menu_id = 0;
   bool success = false;
@@ -121,11 +270,8 @@ void DataBase::remove_data()
 
 void DataBase::remove_owner(uint id)
 {
-  if (_owner.size() == 0)
-  {
-    std::cout << "Owner list is empty!\n";
+  if (list_is_empty(owner_e))
     return;
-  }
 
   if (id == 0)
   {
@@ -246,17 +392,14 @@ uint DataBase::find_owner() const
   uint id = 0;
   bool success = false;
 
-  if (_owner.size() == 0)
-  {
-    std::cout << "Owner list is empty!\n";
+  if (list_is_empty(owner_e))
     return 0;
-  }
 
   std::cout << "Choose owner from list...\n";
 
   /* print header and borders */
   print_border(50);
-  if(!print_head(owner_head))
+  if(!print_head(owner_e))
   {
     return 0;
   }
@@ -304,11 +447,8 @@ uint DataBase::find_car(const uint owner_id) const
   uint id = 0;
   bool success = false;
 
-  if (_car.size() == 0)
-  {
-    std::cout << "Car list is empty!\n";
+  if (list_is_empty(car_e))
     return 0;
-  }
 
   if (owner_id == 0)
   {
@@ -320,7 +460,7 @@ uint DataBase::find_car(const uint owner_id) const
 
   /* print header and borders */
   print_border(28);
-  if(!print_head(car_head))
+  if(!print_head(car_e))
   {
     return 0;
   }
@@ -373,11 +513,8 @@ uint DataBase::find_service(const uint car_id) const
   uint id = 0;
   bool success = false;
 
-  if (_service.size() == 0)
-  {
-    std::cout << "Service list is empty!\n";
+  if (list_is_empty(service_e))
     return 0;
-  }
 
   if (car_id == 0)
   {
@@ -389,7 +526,7 @@ uint DataBase::find_service(const uint car_id) const
 
   /* print header and borders */
   print_border(54);
-  if(!print_head(service_head))
+  if(!print_head(service_e))
   {
     return 0;
   }
@@ -446,18 +583,18 @@ void DataBase::show_data()
   /* 135 spaces */
   print_border(135);
 
-  if(!print_head(main_head))
+  if(!print_head(main_e))
     return;
 
   print_border(135);
 
-  if(!print_head(owner_head))
+  if(!print_head(owner_e))
     return;
 
-  if(!print_head(car_head))
+  if(!print_head(car_e))
     return;
 
-  if(!print_head(service_head))
+  if(!print_head(service_e))
     return;
 
   std::cout << "\n";
@@ -521,6 +658,46 @@ void DataBase::add_data(Service& service)
   service.set_id(++_service_id);
 
   _service.push_back(service);
+}
+
+bool DataBase::list_is_empty(uint type) const
+{
+  switch(type)
+  {
+    case owner_e:
+      {
+        if (_owner.size() == 0)
+        {
+          std::cout << "Owner list is empty!\n";
+          return true;
+        }
+        else
+          return false;
+      }
+    case car_e:
+      {
+        if (_car.size() == 0)
+        {
+          std::cout << "Car list is empty!\n";
+          return true;
+        }
+        else
+          return false;
+      }
+    case service_e:
+      {
+        if (_service.size() == 0)
+        {
+          std::cout << "Service list is empty!\n";
+          return true;
+        }
+        else
+          return false;
+      }
+    default: std::cout << "Invalid type value!\n"; return true;
+  }
+
+  return true;
 }
 
 

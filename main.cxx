@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
               << "3) Write down the famous owner on service\n"
               << "4) Show data\n"
               << "5) Remove data\n"
+              << "6) Edit data\n"
+              << "7) Return auto from service\n"
               << "0) Exit\n\n";
     while(!success)
     {
@@ -34,7 +36,9 @@ int main(int argc, char *argv[])
         case 2: db.add_car(0);        success = true; break;
         case 3: db.add_service(0, 0); success = true; break;
         case 4: db.show_data();       success = true; break;
-        case 5: db.remove_data();    success = true; break;
+        case 5: db.remove_data();     success = true; break;
+        case 6: db.edit_data();       success = true; break;
+        case 7: db.add_out_date();    success = true; break;
         default:
           {
             std::cout << "There is no such number!";
