@@ -205,12 +205,10 @@ void DataBase::remove_service(uint owner_id, uint car_id)
   }
   else if ((owner_id == 0) && (car_id > 0))
   {
-    id = find_service(car_id);
     del_all_car = true;
   }
   else if ((owner_id > 0) && (car_id > 0))
   {
-    id = find_service(car_id);
     del_all_owner = true;
   }
   else
@@ -267,6 +265,7 @@ uint DataBase::find_owner() const
 
   for (const auto& owner : _owner)
   {
+    std::cout << std::setiosflags(std::ios::left);
     std::cout << owner;
     std::cout << "\n";
   }
@@ -311,6 +310,12 @@ uint DataBase::find_car(const uint owner_id) const
     return 0;
   }
 
+  if (owner_id == 0)
+  {
+    std::cout << "There is no owner ID!\n";
+    return 0;
+  }
+
   std::cout << "Choose car from list...\n";
 
   /* print header and borders */
@@ -326,6 +331,7 @@ uint DataBase::find_car(const uint owner_id) const
   {
     if (car.get_owner_id() == owner_id)
     {
+      std::cout << std::setiosflags(std::ios::left);
       std::cout << car;
       std::cout << "\n";
     }
@@ -340,10 +346,15 @@ uint DataBase::find_car(const uint owner_id) const
 
     for (const auto& car : _car)
     {
-      if (car.get_id() == id)
+      if ((car.get_id() == id) && (car.get_owner_id() == owner_id))
       {
         success = true;
         break;
+      }
+      else if ((car.get_id() == id) && (car.get_owner_id() != owner_id))
+      {
+        success = false;
+        std::cout << "Invalid car ID!\n";
       }
     }
 
@@ -368,27 +379,33 @@ uint DataBase::find_service(const uint car_id) const
     return 0;
   }
 
+  if (car_id == 0)
+  {
+    std::cout << "There is no car ID!\n";
+    return 0;
+  }
+
   std::cout << "Choose service from list...\n";
 
   /* print header and borders */
-  print_border(50);
-  if(!print_head(car_head))
+  print_border(54);
+  if(!print_head(service_head))
   {
     return 0;
   }
   std::cout << "\n";
-  print_border(50);
+  print_border(54);
 
   for (const auto& service : _service)
   {
     if (service.get_car_id() == car_id)
     {
+      std::cout << std::setiosflags(std::ios::left);
       std::cout << service;
-      std::cout << "\n";
     }
   }
 
-  print_border(50);
+  print_border(54);
 
   while (!success)
   {
@@ -397,10 +414,15 @@ uint DataBase::find_service(const uint car_id) const
 
     for (const auto& service : _service)
     {
-      if (service.get_id() == id)
+      if ((service.get_id() == id) && (service.get_car_id() == car_id))
       {
         success = true;
         break;
+      }
+      else if ((service.get_id() == id) && (service.get_car_id() != car_id))
+      {
+        success = false;
+        std::cout << "Invalid service ID!\n";
       }
     }
 
@@ -419,24 +441,28 @@ void DataBase::show_data()
 {
   std::cout << "Clients data:\n";
 
-  /* 130 spaces */
-  print_border(130);
+
+
+  /* 135 spaces */
+  print_border(135);
+
+  if(!print_head(main_head))
+    return;
+
+  print_border(135);
 
   if(!print_head(owner_head))
-  {
     return;
-  }
+
   if(!print_head(car_head))
-  {
     return;
-  }
+
   if(!print_head(service_head))
-  {
     return;
-  }
+
   std::cout << "\n";
 
-  print_border(130);
+  print_border(135);
 
   for (const auto& owner : _owner)
   {
@@ -466,7 +492,7 @@ void DataBase::show_data()
     }
   }
 
-  print_border(130);
+  print_border(135);
   std::cout << std::endl;
 }
 
@@ -504,6 +530,7 @@ bool print_head(uint type)
    * type = 1 - Owner header
    * type = 2 - Car header
    * type = 3 - Service header
+   * type== 4 - Main head
    */
 
   if (type == 1)
@@ -518,7 +545,14 @@ bool print_head(uint type)
   }
   else if (type == 3)
   {
-    std::cout << "Date in    | Date out   | Coast     | Description";
+    std::cout << "ID | Date in    | Date out   | Coast     | Description";
+    return true;
+  }
+  else if (type == 4)
+  {
+    std::cout << "                     OWNER                       | "
+                 "            CAR            | "
+                 "                      SERVICE                         \n";
     return true;
   }
   else

@@ -42,7 +42,8 @@ std::istream& operator>>(std::istream &is, Service& service)
 
 std::ostream& operator<<(std::ostream &os, const Service& service)
 {
-  os << std::setw(11) << service._date_in.toString("dd/MM/yyyy").toStdString() << "| "
+  os << std::setw(3)  << service.get_id() << "| "
+     << std::setw(11) << service._date_in.toString("dd/MM/yyyy").toStdString() << "| "
      << std::setw(11) << service._date_out.toString("dd/MM/yyyy").toStdString() << "| "
      << std::setw(10) << service._coast  << "| "
      << service._description
