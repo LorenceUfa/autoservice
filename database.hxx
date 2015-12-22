@@ -40,6 +40,7 @@ private:
 
   uint find_owner() const;
   uint find_car(const uint owner_id) const;
+  uint find_service(const uint car_id) const;
 
 };
 

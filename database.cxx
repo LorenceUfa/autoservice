@@ -137,7 +137,10 @@ void DataBase::remove_owner(uint id)
   for (own = _owner.begin(); own != _owner.end(); )
   {
     if(own->get_id() == id)
+    {
       _owner.erase(own++);
+      break;
+    }
     else
       own++;
   }
@@ -148,38 +151,95 @@ void DataBase::remove_owner(uint id)
 void DataBase::remove_car(uint owner_id)
 {
   uint id = 0;
+  bool del_all = false; /* if owner removed, then remove all owner cars */
+
   if (owner_id == 0)
+  {
+    owner_id = find_owner();
     id = find_car(owner_id);
+  }
+  else
+    del_all = true;
+
+  if ((id == 0) && (del_all == false))
+  {
+    return;
+  }
 
   std::list<Car>::iterator car;
 
-  if (owner_id == 0)
+  for (car = _car.begin(); car != _car.end(); )
   {
-    for (car = _car.begin(); car != _car.end(); )
+    if ((del_all) && (car->get_owner_id() == owner_id))
     {
-      if(car->get_id() == id)
-        _car.erase(car++);
-      else
-        car++;
+      _car.erase(car++);
     }
-  }
-  else
-  {
-    for (car = _car.begin(); car != _car.end(); )
+    else if ((!del_all) && (car->get_id() == id))
     {
-      if(car->get_id() == id)
-        _car.erase(car++);
-      else
-        car++;
+      _car.erase(car++);
+      break;
+    }
+    else
+    {
+      car++;
     }
   }
 
-
+  if (del_all) /* remove all service for owner */
+    remove_service(owner_id, id);
+  else /* remove all service for car */
+    remove_service(0, id);
 }
 
 void DataBase::remove_service(uint owner_id, uint car_id)
 {
+  uint id = 0;
+  bool del_all_owner =false; /* remove all service for owner */
+  bool del_all_car = false; /* remove all service for car */
 
+  if ((owner_id == 0) && (car_id == 0))
+  {
+    owner_id = find_owner();
+    car_id = find_car(owner_id);
+    id = find_service(car_id);
+  }
+  else if ((owner_id == 0) && (car_id > 0))
+  {
+    id = find_service(car_id);
+    del_all_car = true;
+  }
+  else if ((owner_id > 0) && (car_id > 0))
+  {
+    id = find_service(car_id);
+    del_all_owner = true;
+  }
+  else
+  {
+    return;
+  }
+
+  std::list<Service>::iterator service;
+
+  for (service = _service.begin(); service != _service.end(); )
+  {
+    if ((del_all_owner) && (service->get_owner_id() == owner_id))
+    {
+      _service.erase(service++);
+    }
+    else if ((del_all_car) && (service->get_car_id() == car_id))
+    {
+      _service.erase(service++);
+    }
+    else if (service->get_id() == id)
+    {
+      _service.erase(service++);
+      break;
+    }
+    else
+    {
+      service++;
+    }
+  }
 }
 
 /* Functions for print and choose owner from list */
@@ -254,13 +314,13 @@ uint DataBase::find_car(const uint owner_id) const
   std::cout << "Choose car from list...\n";
 
   /* print header and borders */
-  print_border(50);
+  print_border(28);
   if(!print_head(car_head))
   {
     return 0;
   }
   std::cout << "\n";
-  print_border(50);
+  print_border(28);
 
   for (const auto& car : _car)
   {
@@ -271,7 +331,7 @@ uint DataBase::find_car(const uint owner_id) const
     }
   }
 
-  print_border(50);
+  print_border(28);
 
   while (!success)
   {
@@ -290,6 +350,63 @@ uint DataBase::find_car(const uint owner_id) const
     if (!success)
     {
       std::cout << "Car not found!\n";
+      id = 0;
+    }
+  }
+
+  return id;
+}
+
+uint DataBase::find_service(const uint car_id) const
+{
+  uint id = 0;
+  bool success = false;
+
+  if (_service.size() == 0)
+  {
+    std::cout << "Service list is empty!\n";
+    return 0;
+  }
+
+  std::cout << "Choose service from list...\n";
+
+  /* print header and borders */
+  print_border(50);
+  if(!print_head(car_head))
+  {
+    return 0;
+  }
+  std::cout << "\n";
+  print_border(50);
+
+  for (const auto& service : _service)
+  {
+    if (service.get_car_id() == car_id)
+    {
+      std::cout << service;
+      std::cout << "\n";
+    }
+  }
+
+  print_border(50);
+
+  while (!success)
+  {
+    std::cout << "Enter service id: ";
+    std::cin >> id;
+
+    for (const auto& service : _service)
+    {
+      if (service.get_id() == id)
+      {
+        success = true;
+        break;
+      }
+    }
+
+    if (!success)
+    {
+      std::cout << "Service not found!\n";
       id = 0;
     }
   }
