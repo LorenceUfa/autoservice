@@ -1,5 +1,4 @@
 #include <database.hxx>
-#include <algorithm>
 
 DataBase::DataBase()
 {
