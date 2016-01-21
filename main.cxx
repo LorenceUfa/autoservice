@@ -1,10 +1,20 @@
 #include <QCoreApplication>
+#include <QApplication>
+#include "mainwindow.hxx"
 #include "database.hxx"
 
 int main(int argc, char *argv[])
 {
-  QCoreApplication a(argc, argv);
+  QApplication a(argc, argv);
+  MainWindow w;
 
+  w.show();
+
+  return a.exec();
+}
+
+int menu()
+{
   DataBase db;
   bool success;
   bool result = false;
@@ -53,5 +63,5 @@ int main(int argc, char *argv[])
     return 0;
   }
 
-  return a.exec();
+  return 0;
 }

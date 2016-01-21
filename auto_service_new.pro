@@ -4,9 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core
-
-QT       -= gui
+QT       += core gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = auto_service_new
 CONFIG   += console
@@ -21,7 +20,8 @@ SOURCES += main.cxx \
     owner.cxx \
     car.cxx \
     service.cxx \
-    history.cxx
+    history.cxx \
+    mainwindow.cxx
 
 HEADERS += \
     database.hxx \
@@ -29,4 +29,8 @@ HEADERS += \
     service.hxx \
     car.hxx \
     types.hxx \
-    history.hxx
+    history.hxx \
+    mainwindow.hxx
+
+FORMS += \
+    mainwindow.ui
