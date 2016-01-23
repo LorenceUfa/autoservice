@@ -2,6 +2,7 @@
 #define DIALOG_ADD_OWNER_HXX
 
 #include <QDialog>
+#include <QDate>
 
 namespace Ui {
   class Dialog_Add_Owner;
@@ -14,6 +15,18 @@ class Dialog_Add_Owner : public QDialog
 public:
   explicit Dialog_Add_Owner(QWidget *parent = 0);
   ~Dialog_Add_Owner();
+
+  std::string get_surname() const;
+  std::string get_name() const;
+  std::string get_mid_name() const;
+
+  std::string get_brand() const;
+  std::string get_model() const;
+
+  QDate get_date_in() const;
+  QDate get_date_out() const;
+  double get_coast() const;
+  std::string get_descr() const;
 
 protected:
   void changeEvent(QEvent *e);

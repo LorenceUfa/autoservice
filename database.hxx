@@ -23,6 +23,10 @@ public:
   void add_car(uint owner_id);
   void add_service(uint owner_id, uint car_id);
 
+  uint add_data(Car& car);
+  uint add_data(Owner& owner);
+  void add_data(Service& service);
+
 private:
 
   std::list<Car> _car;
@@ -32,10 +36,6 @@ private:
   uint _car_id;
   uint _owner_id;
   uint _service_id;
-
-  uint add_data(Car& car_e);
-  uint add_data(Owner& owner_e);
-  void add_data(Service& service_e);
 
   void edit_owner();
   void edit_car();

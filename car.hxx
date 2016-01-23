@@ -23,8 +23,8 @@ public:
   std::string get_brand() const;
   std::string get_model() const;
 
-  friend std::istream& operator>>(std::istream &is, Car& car_e);
-  friend std::ostream& operator<<(std::ostream &os, const Car& car_e);
+  friend std::istream& operator>>(std::istream &is, Car& car);
+  friend std::ostream& operator<<(std::ostream &os, const Car& car);
 
 private:
   uint _id;

@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   Dialog_Add_Owner d_own;
 
   d_main.show();
-  d_own.show();
+//  d_own.show();
 
 //  int result = 1;
 //  result = menu();
