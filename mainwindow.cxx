@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   ui->tableWidget->setColumnWidth(0, 30);
   ui->tableWidget->setColumnWidth(4, 30);
   ui->tableWidget->setColumnWidth(7, 30);

@@ -2,13 +2,24 @@
 #include <QApplication>
 #include "mainwindow.hxx"
 #include "database.hxx"
+#include "dialog_add_owner.hxx"
+
+int menu();
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  MainWindow w;
+  MainWindow d_main;
+  Dialog_Add_Owner d_own;
 
-  w.show();
+  d_main.show();
+  d_own.show();
+
+//  int result = 1;
+//  result = menu();
+//  if(result == 1) {
+//    return 0;
+//  }
 
   return a.exec();
 }

@@ -100,7 +100,7 @@ void DataBase::add_out_date()
       QDate date;
       std::string str;
 
-      std::cout << "Enter car out date (DD/MM/YYY): ";
+      std::cout << "Enter car out date (DD/MM/YYYY): ";
       std::cin >> str;
 
       date = QDate::fromString(QString::fromStdString(str), "dd/MM/yyyy");
