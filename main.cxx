@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+//#include <QCoreApplication>
 #include <QApplication>
 #include "mainwindow.hxx"
 #include "database.hxx"
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
   MainWindow d_main;
-  Dialog_Add_Owner d_own;
+//  Dialog_Add_Owner d_own;
 
   d_main.show();
 //  d_own.show();

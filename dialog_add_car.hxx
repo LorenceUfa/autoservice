@@ -1,20 +1,20 @@
-#ifndef DIALOG_ADD_OWNER_HXX
-#define DIALOG_ADD_OWNER_HXX
+#ifndef DIALOG_ADD_CAR_HXX
+#define DIALOG_ADD_CAR_HXX
 
 #include <QDialog>
 #include "types.hxx"
 
 namespace Ui {
-  class Dialog_Add_Owner;
+  class Dialog_add_car;
 }
 
-class Dialog_Add_Owner : public QDialog
+class Dialog_Add_Car : public QDialog
 {
   Q_OBJECT
 
 public:
-  explicit Dialog_Add_Owner(QWidget *parent = 0);
-  ~Dialog_Add_Owner();
+  explicit Dialog_Add_Car(QWidget *parent = 0);
+  ~Dialog_Add_Car();
 
   std::string get_surname() const;
   std::string get_name() const;
@@ -34,7 +34,7 @@ protected:
 private slots:
   void enableButtonOk();
 private:
-  Ui::Dialog_Add_Owner *ui;
+  Ui::Dialog_add_car *ui;
 };
 
-#endif // DIALOG_ADD_OWNER_HXX
+#endif // DIALOG_ADD_CAR_HXX

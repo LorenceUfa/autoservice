@@ -17,11 +17,6 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTableWidget" name="tableWidget">
-      <row>
-       <property name="text">
-        <string/>
-       </property>
-      </row>
       <column>
        <property name="text">
         <string>ID</string>

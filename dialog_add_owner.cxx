@@ -8,10 +8,23 @@ Dialog_Add_Owner::Dialog_Add_Owner(QWidget *parent) :
   ui->setupUi(this);
 
   QValidator *doubler = new QDoubleValidator(0);
+
+  /* set line "Coast" for only double variables */
   ui->lineCoast->setValidator(doubler);
+
+  /* set button "OK' enabled if only text is not empty */
+  ui->buttonOk->setEnabled(false);
 
   connect(ui->buttonOk, SIGNAL(clicked(bool)), this, SLOT(accept()));
   connect(ui->buttonCancel, SIGNAL(clicked(bool)), this, SLOT(close()));
+
+  connect(ui->lineSurname, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineName, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineMiddleName, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineBrand, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineModel, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineCoast, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->lineDescr, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
 }
 
 Dialog_Add_Owner::~Dialog_Add_Owner()
@@ -74,4 +87,23 @@ double Dialog_Add_Owner::get_coast() const
 std::string Dialog_Add_Owner::get_descr() const
 {
   return ui->lineDescr->text().toStdString();
+}
+
+void Dialog_Add_Owner::enableButtonOk()
+{
+  if((!ui->lineSurname->text().isEmpty()) &&
+     (!ui->lineName->text().isEmpty()) &&
+     (!ui->lineMiddleName->text().isEmpty()) &&
+     (!ui->lineBrand->text().isEmpty()) &&
+     (!ui->lineModel->text().isEmpty()) &&
+     (!ui->lineCoast->text().isEmpty()) &&
+     (!ui->lineDescr->text().isEmpty())
+     )
+  {
+    ui->buttonOk->setEnabled(true);
+  }
+  else
+  {
+    ui->buttonOk->setEnabled(false);
+  }
 }

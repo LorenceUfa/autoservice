@@ -2,7 +2,6 @@
 #define SERVICE
 
 #include <types.hxx>
-#include <QDate>
 
 class Service
 {

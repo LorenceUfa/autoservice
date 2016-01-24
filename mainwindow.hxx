@@ -31,6 +31,7 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
+  void add_column(const Owner *own, const Car *car, const Service *service);
 };
 
 #endif // MAINWINDOW_HXX

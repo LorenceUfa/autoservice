@@ -8,8 +8,8 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = auto_service_new
-CONFIG   += console
-CONFIG   -= app_bundle
+#CONFIG   += console
+#CONFIG   -= app_bundle
 
 TEMPLATE = app
 
@@ -22,7 +22,8 @@ SOURCES += main.cxx \
     service.cxx \
     history.cxx \
     mainwindow.cxx \
-    dialog_add_owner.cxx
+    dialog_add_owner.cxx \
+    dialog_add_car.cxx
 
 HEADERS += \
     database.hxx \
@@ -32,8 +33,10 @@ HEADERS += \
     types.hxx \
     history.hxx \
     mainwindow.hxx \
-    dialog_add_owner.hxx
+    dialog_add_owner.hxx \
+    dialog_add_car.hxx
 
 FORMS += \
     mainwindow.ui \
-    dialog_add_owner.ui
+    dialog_add_owner.ui \
+    dialog_add_car.ui
