@@ -3,7 +3,6 @@
 #include "dialog_add_owner.hxx"
 #include "dialog_add_car.hxx"
 
-#include <Qt>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -77,9 +76,43 @@ void MainWindow::button_add_owner()
 void MainWindow::button_add_car()
 {
   Dialog_Add_Car dialog;
+  Owner own;
+  Car car;
+  Service serv;
+  int row = ui->tableWidget->currentRow();
+  if (row < 0)
+    return;
+
+  /* set owner information from selected row in table widget */
+  dialog.setID(ui->tableWidget->item(row, owner_id_e)->text());
+  dialog.setSurname(ui->tableWidget->item(row, surname_e)->text());
+  dialog.setName(ui->tableWidget->item(row, name_e)->text());
+  dialog.setMidName(ui->tableWidget->item(row, mid_name_e)->text());
+
   if(dialog.exec() == QDialog::Accepted)
   {
+    uint own_id, car_id;
 
+    own_id = dialog.get_owner_id();
+    own.set_surname(dialog.get_surname());
+    own.set_name(dialog.get_name());
+    own.set_sec_name(dialog.get_mid_name());
+    own.set_id(own_id);
+
+    car.set_brand(dialog.get_brand());
+    car.set_model(dialog.get_model());
+    car.set_owner_id(own_id);
+    car_id = db.add_data(car);
+
+    serv.set_date_in(dialog.get_date_in());
+    serv.set_date_out(dialog.get_date_out());
+    serv.set_coast(dialog.get_coast());
+    serv.set_description(dialog.get_descr());
+    serv.set_owner_id(own_id);
+    serv.set_car_id(car_id);
+    db.add_data(serv);
+
+    add_column(&own, &car, &serv);
   }
 
 }

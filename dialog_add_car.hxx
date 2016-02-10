@@ -28,6 +28,13 @@ public:
   double get_coast() const;
   std::string get_descr() const;
 
+  void setID(const QString& id);
+  void setSurname(const QString& surname);
+  void setName(const QString& name);
+  void setMidName(const QString& mid_name);
+
+  uint get_owner_id() const;
+
 protected:
   void changeEvent(QEvent *e);
 
@@ -35,6 +42,7 @@ private slots:
   void enableButtonOk();
 private:
   Ui::Dialog_add_car *ui;
+  uint owner_id;
 };
 
 #endif // DIALOG_ADD_CAR_HXX
