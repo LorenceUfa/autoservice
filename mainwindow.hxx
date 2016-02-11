@@ -32,6 +32,9 @@ private slots:
 private:
   Ui::MainWindow *ui;
   void add_column(const Owner *own, const Car *car, const Service *service);
+
+  template <typename T>
+  void dialog_func(const T& dialog, Owner& own, Car& car, Service& serv);
 };
 
 #endif // MAINWINDOW_HXX

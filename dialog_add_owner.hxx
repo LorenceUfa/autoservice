@@ -24,7 +24,6 @@ public:
   std::string get_model() const;
 
   QDate get_date_in() const;
-  QDate get_date_out() const;
   double get_coast() const;
   std::string get_descr() const;
 

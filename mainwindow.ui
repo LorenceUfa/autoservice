@@ -85,7 +85,7 @@
        <item>
         <widget class="QPushButton" name="button_add_owner">
          <property name="text">
-          <string>Add new owner</string>
+          <string>New owner</string>
          </property>
         </widget>
        </item>

@@ -103,11 +103,6 @@ QDate Dialog_Add_Car::get_date_in() const
   return ui->dateIn->date();
 }
 
-QDate Dialog_Add_Car::get_date_out() const
-{
-  return ui->dateOut->date();
-}
-
 double Dialog_Add_Car::get_coast() const
 {
   return ui->lineCoast->text().toDouble();
