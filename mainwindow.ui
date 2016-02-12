@@ -104,9 +104,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="button_return_auto">
+        <widget class="QPushButton" name="button_return_car">
          <property name="text">
-          <string>Return auto</string>
+          <string>Return car</string>
          </property>
         </widget>
        </item>

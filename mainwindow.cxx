@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->button_delete, SIGNAL(clicked(bool)), this, SLOT(button_delete()));
   connect(ui->button_edit, SIGNAL(clicked(bool)), this, SLOT(button_edit()));
   connect(ui->button_exit, SIGNAL(clicked(bool)), this, SLOT(button_exit()));
-  connect(ui->button_return_auto, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
+  connect(ui->button_return_car, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
 
   ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   ui->tableWidget->setColumnWidth(0, 30);
