@@ -3,6 +3,7 @@
 #include "dialog_add_owner.hxx"
 #include "dialog_add_car.hxx"
 #include "dialog_add_service.hxx"
+#include "dialog_return_car.hxx"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->button_delete, SIGNAL(clicked(bool)), this, SLOT(button_delete()));
   connect(ui->button_edit, SIGNAL(clicked(bool)), this, SLOT(button_edit()));
   connect(ui->button_exit, SIGNAL(clicked(bool)), this, SLOT(button_exit()));
-  connect(ui->button_return_auto, SIGNAL(clicked(bool)), this, SLOT(button_return_auto()));
+  connect(ui->button_return_auto, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
 
   ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   ui->tableWidget->setColumnWidth(0, 30);
@@ -173,7 +174,7 @@ void MainWindow::button_edit()
 }
 
 
-void MainWindow::button_return_auto()
+void MainWindow::button_return_car()
 {
 
 }

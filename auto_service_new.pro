@@ -24,7 +24,8 @@ SOURCES += main.cxx \
     mainwindow.cxx \
     dialog_add_owner.cxx \
     dialog_add_car.cxx \
-    dialog_add_service.cxx
+    dialog_add_service.cxx \
+    dialog_return_car.cxx
 
 HEADERS += \
     database.hxx \
@@ -36,10 +37,12 @@ HEADERS += \
     mainwindow.hxx \
     dialog_add_owner.hxx \
     dialog_add_car.hxx \
-    dialog_add_service.hxx
+    dialog_add_service.hxx \
+    dialog_return_car.hxx
 
 FORMS += \
     mainwindow.ui \
     dialog_add_owner.ui \
     dialog_add_car.ui \
-    dialog_add_service.ui
+    dialog_add_service.ui \
+    dialog_return_car.ui

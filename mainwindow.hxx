@@ -26,7 +26,7 @@ private slots:
   void button_add_service();
   void button_edit();
   void button_delete();
-  void button_return_auto();
+  void button_return_car();
   void button_exit();
 
 private:
