@@ -106,6 +106,22 @@ void DataBase::add_out_date()
       date = QDate::fromString(QString::fromStdString(str), "dd/MM/yyyy");
 
       service.set_date_out(date);
+      return;
+    }
+  }
+}
+
+void DataBase::add_out_date(const QDate &date_out, const uint &serv_id)
+{
+  if (list_is_empty(owner_e))
+    return;
+
+  for (auto& service : _service)
+  {
+    if (service.get_id() == serv_id)
+    {
+      service.set_date_out(date_out);
+      return;
     }
   }
 }

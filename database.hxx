@@ -12,16 +12,13 @@ class DataBase
 public:
   DataBase();
 
-  std::list<Car> _car;
-  std::list<Owner> _owner;
-  std::list<Service> _service;
-
   void add_data();
   void remove_data();
   void show_data();
   void edit_data();
 
   void add_out_date();
+  void add_out_date(const QDate &date_out, const uint &serv_id);
 
   void add_owner();
   void add_car(uint owner_id);
@@ -32,6 +29,10 @@ public:
   void add_data(Service& service);
 
 private:
+  std::list<Car> _car;
+  std::list<Owner> _owner;
+  std::list<Service> _service;
+
   uint _car_id;
   uint _owner_id;
   uint _service_id;

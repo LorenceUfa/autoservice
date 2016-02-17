@@ -4,6 +4,7 @@
 #include "dialog_add_car.hxx"
 #include "dialog_add_service.hxx"
 #include "dialog_return_car.hxx"
+#include <typeinfo>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -176,7 +177,39 @@ void MainWindow::button_edit()
 
 void MainWindow::button_return_car()
 {
+  Dialog_Return_Car dialog;
+  int row = ui->tableWidget->currentRow();
+  if (row < 0)
+    return;
 
+  /* set owner information from selected row in table widget */
+  dialog.setOwnerID(ui->tableWidget->item(row, owner_id_e)->text());
+  dialog.setSurname(ui->tableWidget->item(row, surname_e)->text());
+  dialog.setName(ui->tableWidget->item(row, name_e)->text());
+  dialog.setMidName(ui->tableWidget->item(row, mid_name_e)->text());
+
+  dialog.setCarID(ui->tableWidget->item(row, car_id_e)->text());
+  dialog.setBrand(ui->tableWidget->item(row, brand_e)->text());
+  dialog.setModel(ui->tableWidget->item(row, model_e)->text());
+
+  dialog.setDateIn(ui->tableWidget->item(row, date_in_e)->text());
+  dialog.setCoast(ui->tableWidget->item(row, coast_e)->text());
+  dialog.setDescription(ui->tableWidget->item(row, descr_e)->text());
+
+  if(dialog.exec() == QDialog::Accepted)
+  {
+    uint serv_id;
+    QDate date;
+
+    date = dialog.get_date_out();
+    serv_id = dialog.get_serv_id();
+
+    db.add_out_date(date, serv_id);
+
+    QTableWidgetItem *newItem = new QTableWidgetItem();
+    newItem->setText(date.toString("dd/MM/yyyy"));
+    ui->tableWidget->setItem(row, date_out_e, newItem);
+  }
 }
 
 void MainWindow::button_exit()

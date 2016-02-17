@@ -28,7 +28,7 @@ enum
   date_id_e,
   date_in_e,
   date_out_e,
-  caost_e,
+  coast_e,
   descr_e
 };
 

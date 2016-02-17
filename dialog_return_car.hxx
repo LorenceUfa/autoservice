@@ -39,7 +39,7 @@ public:
 
   void setServiceID(const QString& id);
   void setDateIn(const QString& date_in);
-  void setCoast(const QString& caost);
+  void setCoast(const QString& coast);
   void setDescription(const QString& description);
 
   uint get_owner_id() const;

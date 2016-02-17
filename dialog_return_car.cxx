@@ -20,6 +20,9 @@ Dialog_Return_Car::Dialog_Return_Car(QWidget *parent) :
   ui->lineBrand->setReadOnly(true);
   ui->lineModel->setReadOnly(true);
 
+  ui->dateIn->setReadOnly(true);
+  ui->lineCoast->setReadOnly(true);
+  ui->lineDescr->setReadOnly(true);
 
   /* set button "OK' enabled if only text is not empty */
   ui->buttonOk->setEnabled(false);
@@ -29,7 +32,7 @@ Dialog_Return_Car::Dialog_Return_Car(QWidget *parent) :
   connect(ui->buttonOk, SIGNAL(clicked(bool)), this, SLOT(accept()));
   connect(ui->buttonCancel, SIGNAL(clicked(bool)), this, SLOT(close()));
 
-  connect(ui->dateOut, SIGNAL(textChanged(QString)), this, SLOT(enableButtonOk()));
+  connect(ui->dateOut, SIGNAL(dateChanged(QDate)), this, SLOT(enableButtonOk()));
 }
 
 Dialog_Return_Car::~Dialog_Return_Car()
@@ -84,6 +87,21 @@ void Dialog_Return_Car::setModel(const QString& model)
   ui->lineModel->setText(model);
 }
 
+void Dialog_Return_Car::setDateIn(const QString &date_in)
+{
+  ui->dateIn->setDate(QDate::fromString(date_in, "dd/MM/yyyy"));
+}
+
+void Dialog_Return_Car::setCoast(const QString &coast)
+{
+  ui->lineCoast->setText(coast);
+}
+
+void Dialog_Return_Car::setDescription(const QString &description)
+{
+  ui->lineDescr->setText(description);
+}
+
 uint Dialog_Return_Car::get_owner_id() const
 {
   return owner_id;
@@ -92,6 +110,11 @@ uint Dialog_Return_Car::get_owner_id() const
 uint Dialog_Return_Car::get_car_id() const
 {
   return car_id;
+}
+
+uint Dialog_Return_Car::get_serv_id() const
+{
+  return serv_id;
 }
 
 std::string Dialog_Return_Car::get_surname() const
@@ -124,6 +147,11 @@ QDate Dialog_Return_Car::get_date_in() const
   return ui->dateIn->date();
 }
 
+QDate Dialog_Return_Car::get_date_out() const
+{
+  return ui->dateOut->date();
+}
+
 double Dialog_Return_Car::get_coast() const
 {
   return ui->lineCoast->text().toDouble();
@@ -136,7 +164,7 @@ std::string Dialog_Return_Car::get_descr() const
 
 void Dialog_Return_Car::enableButtonOk()
 {
-  if((!ui->dateOut->text().isEmpty()))
+  if(!(ui->dateOut->date() < ui->dateIn->date()))
   {
     ui->buttonOk->setEnabled(true);
   }
