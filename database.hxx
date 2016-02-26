@@ -17,6 +17,8 @@ public:
   void show_data();
   void edit_data();
 
+  void edit_data(Owner& owner, Car& car, Service& service);
+
   void add_out_date();
   void add_out_date(const QDate &date_out, const uint &serv_id);
 

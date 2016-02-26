@@ -32,7 +32,7 @@ Dialog_Return_Car::Dialog_Return_Car(QWidget *parent) :
   connect(ui->buttonOk, SIGNAL(clicked(bool)), this, SLOT(accept()));
   connect(ui->buttonCancel, SIGNAL(clicked(bool)), this, SLOT(close()));
 
-  connect(ui->dateOut, SIGNAL(dateChanged(QDate)), this, SLOT(enableButtonOk()));
+  connect(ui->dateOut, SIGNAL(editingFinished()), this, SLOT(enableButtonOk()));
 }
 
 Dialog_Return_Car::~Dialog_Return_Car()

@@ -126,6 +126,42 @@ void DataBase::add_out_date(const QDate &date_out, const uint &serv_id)
   }
 }
 
+void DataBase::edit_data(Owner& owner, Car& car, Service& service)
+{
+  for (auto& own : _owner)
+  {
+    if (own.get_id() == owner.get_id())
+    {
+      own.set_name(owner.get_name());
+      own.set_surname(owner.get_surname());
+      own.set_sec_name(owner.get_sec_name());
+      break;
+    }
+  }
+
+  for (auto& c : _car)
+  {
+    if (c.get_id() == car.get_id())
+    {
+      c.set_brand(car.get_brand());
+      c.set_model(car.get_model());
+      break;
+    }
+  }
+
+  for (auto& serv : _service)
+  {
+    if (serv.get_id() == service.get_id())
+    {
+      serv.set_coast(service.get_coast());
+      serv.set_description(service.get_description());
+      serv.set_date_in(service.get_date_in());
+      serv.set_date_out(service.get_date_out());
+      break;
+    }
+  }
+}
+
 void DataBase::edit_data()
 {
   if (list_is_empty(owner_e))
