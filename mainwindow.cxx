@@ -4,6 +4,7 @@
 #include "dialog_add_car.hxx"
 #include "dialog_add_service.hxx"
 #include "dialog_return_car.hxx"
+#include "dialog_edit.hxx"
 #include <typeinfo>
 
 
@@ -21,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->button_exit, SIGNAL(clicked(bool)), this, SLOT(button_exit()));
   connect(ui->button_return_car, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
 
-  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+//  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   ui->tableWidget->setColumnWidth(0, 30);
   ui->tableWidget->setColumnWidth(4, 30);
   ui->tableWidget->setColumnWidth(7, 30);
@@ -171,7 +172,74 @@ void MainWindow::button_delete()
 
 void MainWindow::button_edit()
 {
+  Dialog_Edit dialog;
 
+  int row = ui->tableWidget->currentRow();
+  if (row < 0)
+    return;
+
+  Owner own;
+  Car car;
+  Service serv;
+
+  /* set owner information from selected row in table widget */
+  dialog.setOwnerID(ui->tableWidget->item(row, owner_id_e)->text());
+  dialog.setSurname(ui->tableWidget->item(row, surname_e)->text());
+  dialog.setName(ui->tableWidget->item(row, name_e)->text());
+  dialog.setMidName(ui->tableWidget->item(row, mid_name_e)->text());
+
+  dialog.setCarID(ui->tableWidget->item(row, car_id_e)->text());
+  dialog.setBrand(ui->tableWidget->item(row, brand_e)->text());
+  dialog.setModel(ui->tableWidget->item(row, model_e)->text());
+
+  dialog.setDateIn(ui->tableWidget->item(row, date_in_e)->text());
+
+  if (ui->tableWidget->item(row, date_out_e))
+    dialog.setDateOut(ui->tableWidget->item(row, date_out_e)->text());
+  else
+    dialog.setDateOut(NULL);
+
+  dialog.setCoast(ui->tableWidget->item(row, coast_e)->text());
+  dialog.setDescription(ui->tableWidget->item(row, descr_e)->text());
+
+  if(dialog.exec() == QDialog::Accepted)
+  {
+    uint own_id, car_id;
+
+    dialog_func<Dialog_Edit>(dialog, own, car, serv);
+
+    own_id = dialog.get_owner_id();
+    own.set_id(own_id);
+
+    car_id = dialog.get_car_id();
+    car.set_owner_id(own_id);
+    car.set_id(car_id);
+
+    if (ui->tableWidget->item(row, date_out_e)) {
+      QDate date = dialog.get_date_out();
+
+      serv.set_date_out(date);
+
+      /* Set date to table widget */
+      ui->tableWidget->item(row, date_out_e)->setText(date.toString("dd/MM/yyyy"));
+    }
+    serv.set_owner_id(own_id);
+    serv.set_car_id(car_id);
+
+    /* Update data in table widget */
+    ui->tableWidget->item(row, surname_e)->setText(QString::fromStdString(own.get_surname()));
+    ui->tableWidget->item(row, name_e)->setText(QString::fromStdString(own.get_name()));
+    ui->tableWidget->item(row, mid_name_e)->setText(QString::fromStdString(own.get_sec_name()));
+
+    ui->tableWidget->item(row, brand_e)->setText(QString::fromStdString(car.get_brand()));
+    ui->tableWidget->item(row, model_e)->setText(QString::fromStdString(car.get_model()));
+
+    ui->tableWidget->item(row, date_in_e)->setText(serv.get_date_in().toString("dd/MM/yyyy"));
+    ui->tableWidget->item(row, coast_e)->setText(tr("%1").arg(serv.get_coast()));
+    ui->tableWidget->item(row, descr_e)->setText(QString::fromStdString(serv.get_description()));
+
+    db.edit_data(own, car, serv);
+  }
 }
 
 
