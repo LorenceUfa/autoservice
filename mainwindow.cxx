@@ -22,10 +22,19 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->button_exit, SIGNAL(clicked(bool)), this, SLOT(button_exit()));
   connect(ui->button_return_car, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
 
-//  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
-  ui->tableWidget->setColumnWidth(0, 30);
-  ui->tableWidget->setColumnWidth(4, 30);
-  ui->tableWidget->setColumnWidth(7, 30);
+  /* Column resize to content */
+  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  /* Do not edit contents */
+  ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+  ui->tableWidget->setColumnWidth(0, 50);
+  ui->tableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
+
+  ui->tableWidget->setColumnWidth(4, 50);
+  ui->tableWidget->horizontalHeader()->setResizeMode(4, QHeaderView::Fixed);
+
+  ui->tableWidget->setColumnWidth(7, 50);
+  ui->tableWidget->horizontalHeader()->setResizeMode(7, QHeaderView::Fixed);
 }
 
 MainWindow::~MainWindow()
