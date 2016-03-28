@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = auto_service_new
@@ -26,7 +26,8 @@ SOURCES += main.cxx \
     dialog_add_car.cxx \
     dialog_add_service.cxx \
     dialog_return_car.cxx \
-    dialog_edit.cxx
+    dialog_edit.cxx \
+    dialog_sql.cxx
 
 HEADERS += \
     database.hxx \
@@ -40,7 +41,8 @@ HEADERS += \
     dialog_add_car.hxx \
     dialog_add_service.hxx \
     dialog_return_car.hxx \
-    dialog_edit.hxx
+    dialog_edit.hxx \
+    dialog_sql.hxx
 
 FORMS += \
     mainwindow.ui \
@@ -48,4 +50,5 @@ FORMS += \
     dialog_add_car.ui \
     dialog_add_service.ui \
     dialog_return_car.ui \
-    dialog_edit.ui
+    dialog_edit.ui \
+    dialog_sql.ui

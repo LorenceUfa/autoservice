@@ -27,6 +27,7 @@ private slots:
   void button_edit();
   void button_delete();
   void button_return_car();
+  void button_sql();
   void button_exit();
 
 private:

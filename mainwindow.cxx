@@ -5,6 +5,7 @@
 #include "dialog_add_service.hxx"
 #include "dialog_return_car.hxx"
 #include "dialog_edit.hxx"
+#include "dialog_sql.hxx"
 #include <typeinfo>
 
 
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->button_edit, SIGNAL(clicked(bool)), this, SLOT(button_edit()));
   connect(ui->button_exit, SIGNAL(clicked(bool)), this, SLOT(button_exit()));
   connect(ui->button_return_car, SIGNAL(clicked(bool)), this, SLOT(button_return_car()));
+  connect(ui->button_sql, SIGNAL(clicked(bool)), this, SLOT(button_sql()));
 
   /* Column resize to content */
   ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
@@ -286,6 +288,18 @@ void MainWindow::button_return_car()
     QTableWidgetItem *newItem = new QTableWidgetItem();
     newItem->setText(date.toString("dd/MM/yyyy"));
     ui->tableWidget->setItem(row, date_out_e, newItem);
+  }
+}
+
+void MainWindow::button_sql()
+{
+  Dialog_Sql dialog;
+
+  dialog.get_data_from_sql();
+
+  if(dialog.exec() == QDialog::Accepted)
+  {
+
   }
 }
 
