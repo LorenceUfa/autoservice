@@ -25,7 +25,7 @@ enum
   car_id_e,
   brand_e,
   model_e,
-  date_id_e,
+  serv_id_e,
   date_in_e,
   date_out_e,
   coast_e,

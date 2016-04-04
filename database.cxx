@@ -319,6 +319,41 @@ void DataBase::remove_data()
   }
 }
 
+void DataBase::del_data(const uint owner_id, const uint car_id, const uint serv_id)
+{
+  remove_owner(owner_id);
+
+  std::list<Car>::iterator car;
+
+  for (car = _car.begin(); car != _car.end(); )
+  {
+    if (car->get_id() == car_id)
+    {
+      _car.erase(car++);
+      break;
+    }
+    else
+    {
+      car++;
+    }
+  }
+
+  std::list<Service>::iterator service;
+
+  for (service = _service.begin(); service != _service.end(); )
+  {
+    if (service->get_id() == serv_id)
+    {
+      _service.erase(service++);
+      break;
+    }
+    else
+    {
+      service++;
+    }
+  }
+}
+
 void DataBase::remove_owner(uint id)
 {
   if (list_is_empty(owner_e))

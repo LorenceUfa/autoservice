@@ -30,6 +30,8 @@ public:
   uint add_data(Owner& owner);
   void add_data(Service& service);
 
+  void del_data(const uint owner_id, const uint car_id, const uint serv_id);
+
 private:
   std::list<Car> _car;
   std::list<Owner> _owner;

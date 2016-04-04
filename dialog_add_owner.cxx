@@ -7,6 +7,8 @@ Dialog_Add_Owner::Dialog_Add_Owner(QWidget *parent) :
 {
   ui->setupUi(this);
 
+  setWindowTitle("Add new owner");
+
   QValidator *doubler = new QDoubleValidator(0);
 
   /* set line "Coast" for only double variables */

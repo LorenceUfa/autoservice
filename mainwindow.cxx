@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
 
+  setWindowTitle("Autoservice");
+
   connect(ui->button_add_car, SIGNAL(clicked(bool)), this, SLOT(button_add_car()));
   connect(ui->button_add_owner, SIGNAL(clicked(bool)), this, SLOT(button_add_owner()));
   connect(ui->button_add_service, SIGNAL(clicked(bool)), this, SLOT(button_add_service()));
@@ -179,7 +181,21 @@ void MainWindow::button_add_service()
 
 void MainWindow::button_delete()
 {
+  int row = ui->tableWidget->currentRow();
+  if (row < 0)
+    return;
 
+  uint owner_id;
+  uint car_id;
+  uint service_id;
+
+  owner_id = ui->tableWidget->item(row, owner_id_e)->text().toUInt();
+  car_id = ui->tableWidget->item(row, car_id_e)->text().toUInt();
+  service_id = ui->tableWidget->item(row, serv_id_e)->text().toUInt();
+
+  db.del_data(owner_id, car_id, service_id);
+
+  ui->tableWidget->removeRow(row);
 }
 
 void MainWindow::button_edit()
