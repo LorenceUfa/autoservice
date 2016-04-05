@@ -22,6 +22,8 @@ public:
 
 private:
   Ui::Dialog_Sql *ui;
+
+  void create_item(const int row, const int column, QString &str);
 };
 
 #endif // DIALOG_SQL_HXX

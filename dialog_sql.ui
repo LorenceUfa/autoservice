@@ -23,12 +23,12 @@
      </column>
      <column>
       <property name="text">
-       <string>Name</string>
+       <string>Surname</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Surname</string>
+       <string>Name</string>
       </property>
      </column>
      <column>
