@@ -14,19 +14,24 @@ Dialog_Sql::Dialog_Sql(QWidget *parent) :
   connect(ui->buttonExit, SIGNAL(clicked(bool)), this, SLOT(close()));
 
   /* Column resize to content */
-//  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+#if (QT_VERSION < 0x050000) // check QT library version
+  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  ui->tableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Fixed);
+  ui->tableWidget->horizontalHeader()->setResizeMode(4, QHeaderView::Fixed);
+  ui->tableWidget->horizontalHeader()->setResizeMode(7, QHeaderView::Fixed);
+#else
   ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+  ui->tableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
+  ui->tableWidget->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Fixed);
+  ui->tableWidget->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
+#endif
+
   /* Do not edit contents */
   ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   ui->tableWidget->setColumnWidth(0, 50);
-  ui->tableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
-
   ui->tableWidget->setColumnWidth(4, 50);
-  ui->tableWidget->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Fixed);
-
   ui->tableWidget->setColumnWidth(7, 50);
-  ui->tableWidget->horizontalHeader()->setSectionResizeMode(7, QHeaderView::Fixed);
 
 }
 
